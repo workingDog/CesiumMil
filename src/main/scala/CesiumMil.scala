@@ -1,6 +1,6 @@
 import cesium._
 import cesiumOptions._
-import com.kodekutters.ms.MS._
+import com.kodekutters.ms._
 
 import scala.language.implicitConversions
 import scala.scalajs.js
@@ -47,7 +47,6 @@ object CesiumMil extends JSApp {
             image(sym.getMarker().asCanvas()). // <--- the billboard image is the symbol
             show(true).
             scale(2.0).
-            color(Color.LIME).
             rotation(Math.PI / 4.0).
             horizontalOrigin(HorizontalOrigin.CENTER).
             pixelOffset(new Cartesian2(-sym.markerAnchor.x, -sym.markerAnchor.y)).
