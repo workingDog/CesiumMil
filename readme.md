@@ -1,8 +1,9 @@
 # CesiumScala example with ScalaMS 
 
-An example of using [ScalaMS](https://github.com/workingDog/ScalaMS) and [CesiumScala](https://github.com/workingDog/CesiumScala) 
+An example of using the Scala.js interfaces to the military symbology [ScalaMS](https://github.com/workingDog/ScalaMS) and 
+to Cesium [CesiumScala](https://github.com/workingDog/CesiumScala) 
 
-To compile and generate this example **CesiumMil** type:
+To compile and generate this example type:
  
     sbt fastOptJS
 
