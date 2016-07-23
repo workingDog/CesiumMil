@@ -34,7 +34,7 @@ object CesiumMil extends JSApp {
       infoBox(false))
 
     // create a MIL-2525 symbol
-    val sym = new Symbol("SFG-UCI----D", SymbolOptions.
+    val sym = new Symbol("sfgpewrh--mt", SymbolOptions.
       size(80).
       quantity("200").
       staffComments("for reinforcements".toUpperCase).
