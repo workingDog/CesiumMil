@@ -16,7 +16,7 @@ import scala.scalajs.js.JSApp
   * Then point your browser to http://localhost:8080/Apps/CesiumMS.html
   *
   * P.S
-  * you may need a key for Bing Map, see: https://www.bingmapsportal.com/
+  * you may need to get a key for Bing Map, see: https://www.bingmapsportal.com/
   * and put it in the CesiumMS.html.
   */
 object CesiumMil extends JSApp {
@@ -24,7 +24,6 @@ object CesiumMil extends JSApp {
   implicit def Cartesian3ToConstPosProp(value: Cartesian3): ConstantPositionProperty = new ConstantPositionProperty(value)
 
   implicit def ValueToConstProp(value: Any): ConstantProperty = new ConstantProperty(value.asInstanceOf[js.Any])
-
 
   def main(): Unit = {
     Console.println("---> hello from CesiumMil")
@@ -39,7 +38,7 @@ object CesiumMil extends JSApp {
     def addBillboard() = {
       // create a MIL-2525 symbol
       val sym = new Symbol("SFG-UCI----D", SymbolOptions.
-        size(45).
+        size(80).
         quantity("200").
         staffComments("for reinforcements".toUpperCase).
         direction(750 * 360 / 6400).
@@ -48,15 +47,14 @@ object CesiumMil extends JSApp {
         location("0900000.0E570306.0N"))
 
       viewer.entities.add(new Entity(EntityOptions.
-        position(Cartesian3.fromDegrees(151.2093, -33.8688, 0.0)).  // Sydney
+        position(Cartesian3.fromDegrees(151.2093, -33.8688)).  // Sydney
         billboard(new BillboardGraphics(
           BillboardGraphicsOptions.
             image(sym.getMarker().asCanvas()). // <--- the billboard image is the symbol
             show(true).
-            scale(0.9).
-            rotation(Math.PI / 4.0).
-            width(100.0).
-            height(100.0)))))
+            scale(1.2).
+            width(240.0).
+            height(80.0)))))
     }
 
     addBillboard()
