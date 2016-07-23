@@ -22,11 +22,9 @@ import scala.scalajs.js.JSApp
 object CesiumMil extends JSApp {
 
   implicit def Cartesian3ToConstPosProp(value: Cartesian3): ConstantPositionProperty = new ConstantPositionProperty(value)
-
   implicit def ValueToConstProp(value: Any): ConstantProperty = new ConstantProperty(value.asInstanceOf[js.Any])
 
   def main(): Unit = {
-    Console.println("---> hello from CesiumMil")
 
     // launch the Cesium viewer
     val viewer = new Viewer("cesiumContainer", ViewerOptions.
@@ -35,29 +33,26 @@ object CesiumMil extends JSApp {
       timeline(false).
       infoBox(false))
 
-    def addBillboard() = {
-      // create a MIL-2525 symbol
-      val sym = new Symbol("SFG-UCI----D", SymbolOptions.
-        size(80).
-        quantity("200").
-        staffComments("for reinforcements".toUpperCase).
-        direction(750 * 360 / 6400).
-        `type`("machine gun").
-        dtg("30140000ZSEP97").
-        location("0900000.0E570306.0N"))
+    // create a MIL-2525 symbol
+    val sym = new Symbol("SFG-UCI----D", SymbolOptions.
+      size(80).
+      quantity("200").
+      staffComments("for reinforcements".toUpperCase).
+      direction(750 * 360 / 6400).
+      `type`("machine gun").
+      dtg("30140000ZSEP97").
+      location("0900000.0E570306.0N"))
 
-      viewer.entities.add(new Entity(EntityOptions.
-        position(Cartesian3.fromDegrees(151.2093, -33.8688)).  // Sydney
-        billboard(new BillboardGraphics(
-          BillboardGraphicsOptions.
-            image(sym.getMarker().asCanvas()). // <--- the billboard image is the symbol
-            show(true).
-            scale(1.2).
-            width(240.0).
-            height(80.0)))))
-    }
-
-    addBillboard()
+    // add a billboard with the symbol as the image
+    viewer.entities.add(new Entity(EntityOptions.
+      position(Cartesian3.fromDegrees(151.2093, -33.8688)). // Sydney
+      billboard(new BillboardGraphics(
+      BillboardGraphicsOptions.
+        image(sym.getMarker().asCanvas()). // <--- the billboard image is the symbol
+        show(true).
+        scale(1.2).
+        width(240.0).
+        height(80.0)))))
   }
 
 }
