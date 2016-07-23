@@ -38,25 +38,29 @@ object CesiumMil extends JSApp {
 
     def addBillboard() = {
       // create a MIL-2525 symbol
-      val sym = new Symbol("SFG-UCI----D", SymbolOptions.size(35))
+      val sym = new Symbol("SFG-UCI----D", SymbolOptions.
+        size(45).
+        quantity("200").
+        staffComments("for reinforcements".toUpperCase).
+        direction(750 * 360 / 6400).
+        `type`("machine gun").
+        dtg("30140000ZSEP97").
+        location("0900000.0E570306.0N"))
 
       viewer.entities.add(new Entity(EntityOptions.
-        position(Cartesian3.fromDegrees(-75.59777, 40.03883)).
+        position(Cartesian3.fromDegrees(151.2093, -33.8688, 0.0)).  // Sydney
         billboard(new BillboardGraphics(
           BillboardGraphicsOptions.
             image(sym.getMarker().asCanvas()). // <--- the billboard image is the symbol
             show(true).
-            scale(2.0).
+            scale(0.9).
             rotation(Math.PI / 4.0).
-            horizontalOrigin(HorizontalOrigin.CENTER).
-            pixelOffset(new Cartesian2(-sym.markerAnchor.x, -sym.markerAnchor.y)).
-            verticalOrigin(VerticalOrigin.BOTTOM).
-            alignedAxis(Cartesian3.ZERO).
-            width(50.0).
-            height(25.0)))))
+            width(100.0).
+            height(100.0)))))
     }
 
     addBillboard()
   }
+
 }
 
