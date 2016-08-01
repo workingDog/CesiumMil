@@ -27,11 +27,7 @@ object CesiumMil extends JSApp {
   def main(): Unit = {
 
     // launch the Cesium viewer
-    val viewer = new Viewer("cesiumContainer", ViewerOptions.
-      scene3DOnly(true).
-      animation(false).
-      timeline(false).
-      infoBox(false))
+    val viewer = new Viewer("cesiumContainer")
 
     // create a MIL-2525 symbol
     val sym = new Symbol("sfgpewrh--mt", SymbolOptions.
@@ -53,6 +49,7 @@ object CesiumMil extends JSApp {
         scale(1.2).
         width(240.0).
         height(80.0)))))
+
   }
 
 }
