@@ -6,6 +6,8 @@ import scala.language.implicitConversions
 import scala.scalajs.js
 import scala.scalajs.js.JSApp
 
+
+
 /**
   * a basic example using ScalaMS the Scala.js interface to milsymbol.js with CesiumScala.
   *
@@ -27,7 +29,11 @@ object CesiumMil extends JSApp {
   def main(): Unit = {
 
     // launch the Cesium viewer
-    val viewer = new Viewer("cesiumContainer")
+    val viewer = new Viewer("cesiumContainer", ViewerOptions.
+      scene3DOnly(true).
+      animation(false).
+      timeline(false).
+      infoBox(false))
 
     // create a MIL-2525 symbol
     val sym = new Symbol("sfgpewrh--mt", SymbolOptions.
@@ -51,6 +57,5 @@ object CesiumMil extends JSApp {
         height(80.0)))))
 
   }
-
 }
 
