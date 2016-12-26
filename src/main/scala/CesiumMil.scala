@@ -1,11 +1,10 @@
 import cesium._
 import cesiumOptions._
 import com.kodekutters.ms._
-
+import CesiumImplicits._
 import scala.language.implicitConversions
 import scala.scalajs.js
 import scala.scalajs.js.JSApp
-
 
 
 /**
@@ -24,26 +23,36 @@ import scala.scalajs.js.JSApp
 object CesiumMil extends JSApp {
 
   implicit def Cartesian3ToConstPosProp(value: Cartesian3): ConstantPositionProperty = new ConstantPositionProperty(value)
+
   implicit def ValueToConstProp(value: Any): ConstantProperty = new ConstantProperty(value.asInstanceOf[js.Any])
+
+  implicit def ImageToMaterialPosProp(value: Any): ImageMaterialProperty =
+    new ImageMaterialProperty(
+      ImageMaterialPropertyOptions.
+        image(value).
+        transparent(false))
+
 
   def main(): Unit = {
 
     // launch the Cesium viewer
-    val viewer = new Viewer("cesiumContainer", ViewerOptions.
-      scene3DOnly(true).
-      animation(false).
-      timeline(false).
-      infoBox(false))
+    val viewer = new Viewer("cesiumContainer")
+
+    val options = new SymbolOptions {
+      override val size: js.UndefOr[Double] = 80
+      override val quantity: js.UndefOr[String] = "200"
+      override val staffComments: js.UndefOr[String] = "for reinforcements".toUpperCase
+      override val direction: js.UndefOr[Double] = 750 * 360 / 6400
+      override val `type`: js.UndefOr[String] = "machine gun"
+      override val dtg: js.UndefOr[String] = "30140000ZSEP97"
+      override val fill: js.UndefOr[Boolean] = true
+      override val location: js.UndefOr[String] = "0900000.0E570306.0N"
+      override val outlineWidth: js.UndefOr[Double] = 6
+      override val outlineColor: js.UndefOr[String] = "rgb(255,255,0)"
+    }
 
     // create a MIL-2525 symbol
-    val sym = new Symbol("sfgpewrh--mt", SymbolOptions.
-      size(80).
-      quantity("200").
-      staffComments("for reinforcements".toUpperCase).
-      direction(750 * 360 / 6400).
-      `type`("machine gun").
-      dtg("30140000ZSEP97").
-      location("0900000.0E570306.0N"))
+    val sym = new Symbol("sfgpewrh--mt", options)
 
     // add a billboard with the symbol as the image
     viewer.entities.add(new Entity(EntityOptions.
@@ -57,5 +66,6 @@ object CesiumMil extends JSApp {
         height(80.0)))))
 
   }
+
 }
 
