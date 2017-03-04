@@ -38,6 +38,7 @@ object CesiumMil extends JSApp {
     // launch the Cesium viewer
     val viewer = new Viewer("cesiumContainer")
 
+    // if using scala.js-2.11.x
     val options = new SymbolOptions {
       override val size: js.UndefOr[Double] = 80
       override val quantity: js.UndefOr[String] = "200"
@@ -50,6 +51,20 @@ object CesiumMil extends JSApp {
       override val outlineWidth: js.UndefOr[Double] = 6
       override val outlineColor: js.UndefOr[String] = "rgb(255,255,0)"
     }
+
+    // if using scala.js-2.12.x
+    //    val options = new SymbolOptions {
+    //      override val size = 80
+    //      override val quantity = "200"
+    //      override val staffComments = "for reinforcements".toUpperCase
+    //      override val direction = 750 * 360 / 6400
+    //      override val `type` = "machine gun"
+    //      override val dtg = "30140000ZSEP97"
+    //      override val fill = true
+    //      override val location = "0900000.0E570306.0N"
+    //      override val outlineWidth = 6
+    //      override val outlineColor = "rgb(255,255,0)"
+    //    }
 
     // create a MIL-2525 symbol
     val sym = new Symbol("sfgpewrh--mt", options)
