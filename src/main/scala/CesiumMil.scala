@@ -26,12 +26,6 @@ object CesiumMil extends JSApp {
 
   implicit def ValueToConstProp(value: Any): ConstantProperty = new ConstantProperty(value.asInstanceOf[js.Any])
 
-  implicit def ImageToMaterialPosProp(value: Any): ImageMaterialProperty =
-    new ImageMaterialProperty(
-      ImageMaterialPropertyOptions.
-        image(value).
-        transparent(false))
-
 
   def main(): Unit = {
 
