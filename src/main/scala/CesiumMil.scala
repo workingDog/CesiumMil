@@ -2,6 +2,7 @@ import cesium._
 import cesiumOptions._
 import com.kodekutters.ms._
 import CesiumImplicits._
+
 import scala.language.implicitConversions
 import scala.scalajs.js
 import scala.scalajs.js.JSApp
@@ -26,7 +27,6 @@ object CesiumMil extends JSApp {
 
   implicit def ValueToConstProp(value: Any): ConstantProperty = new ConstantProperty(value.asInstanceOf[js.Any])
 
-
   def main(): Unit = {
 
     // launch the Cesium viewer
@@ -34,41 +34,34 @@ object CesiumMil extends JSApp {
 
     // if using scala.js-2.11.x
     val options = new SymbolOptions {
-      override val size: js.UndefOr[Double] = 80
-      override val quantity: js.UndefOr[String] = "200"
       override val staffComments: js.UndefOr[String] = "for reinforcements".toUpperCase
-      override val direction: js.UndefOr[Double] = 750 * 360 / 6400
+      override val direction: js.UndefOr[Double] = 750.0 * 360.0 / 6400.0
       override val `type`: js.UndefOr[String] = "machine gun"
       override val dtg: js.UndefOr[String] = "30140000ZSEP97"
-      override val fill: js.UndefOr[Boolean] = true
       override val location: js.UndefOr[String] = "0900000.0E570306.0N"
-      override val outlineWidth: js.UndefOr[Double] = 6
-      override val outlineColor: js.UndefOr[String] = "rgb(255,255,0)"
+      override val quantity: js.UndefOr[String] = "200"
     }
-
-    // if using scala.js-2.12.x
-    //    val options = new SymbolOptions {
-    //      override val size = 80
-    //      override val quantity = "200"
-    //      override val staffComments = "for reinforcements".toUpperCase
-    //      override val direction = 750 * 360 / 6400
-    //      override val `type` = "machine gun"
-    //      override val dtg = "30140000ZSEP97"
-    //      override val fill = true
-    //      override val location = "0900000.0E570306.0N"
-    //      override val outlineWidth = 6
-    //      override val outlineColor = "rgb(255,255,0)"
-    //    }
 
     // create a MIL-2525 symbol
     val sym = new Symbol("sfgpewrh--mt", options)
+
+    // style options
+    val style = new SymbolStyle {
+      override val size: js.UndefOr[Double] = 80.0
+      override val fill: js.UndefOr[Boolean] = true
+      override val outlineWidth: js.UndefOr[Double] = 6.0
+      override val outlineColor: js.UndefOr[String] = "rgb(255,255,0)"
+    }
+
+    // add the style to the symbol
+    sym.setOptions(style)
 
     // add a billboard with the symbol as the image
     viewer.entities.add(new Entity(EntityOptions.
       position(Cartesian3.fromDegrees(151.2093, -33.8688)). // Sydney
       billboard(new BillboardGraphics(
       BillboardGraphicsOptions.
-        image(sym.getMarker().asCanvas()). // <--- the billboard image is the symbol
+        image(sym.asCanvas()). // <--- the billboard image is the symbol
         show(true).
         scale(1.2).
         width(240.0).

@@ -6,14 +6,12 @@ organization := "com.github.workingDog"
 
 scalaJSStage in Global := FastOptStage
 
-scalaVersion := "2.11.8"
-
-crossScalaVersions := Seq("2.11.8", "2.12.1")
+scalaVersion := "2.11.11"
 
 libraryDependencies ++= Seq(
-  "org.scala-js" %%% "scalajs-dom" % "0.9.1",
+  "org.scala-js" %%% "scalajs-dom" % "0.9.3",
   "com.github.workingDog" %%% "cesiumscala" % "1.6",
-  "com.github.workingDog" %%% "scalams" % "1.1.0"
+  "com.github.workingDog" %%% "scalams" % "1.3.0"
 )
 
 jsDependencies += RuntimeDOM
